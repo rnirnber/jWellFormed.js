@@ -14,7 +14,7 @@ jWellFormed.js hopes to provide end-users with something slightly better than wh
 Features:
 ---------
 
-  - Embraces jQuery's implict iteration via css-style selectors. Multiple form elements can be validated against the same user-defined Fn's, where the first element in a set to fails validation can be highlighted.
+  - Embraces jQuery's implict iteration via css-style selectors. Multiple form elements can be validated against the same user-defined Fn's, where the first element in a set to fail validation can be highlighted.
   - Experimental support for Async validation via HTTP GET and POST.
   - No documentation required, it's super simple! Just see the example page. 
 

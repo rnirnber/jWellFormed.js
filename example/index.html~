@@ -78,7 +78,7 @@
 			</form>
 		</div>
 		<div class='form_b'>
-			<h2>Form B (Constructor option to make onsubmit return false upon validation and run a custom callback function instead. Also demonstrates async/ajax..)</h2>
+			<h2>Form B (Constructor override to return false and run a custom callback on validation)</h2>
 			<form method="POST" action="#" id="form_b">
 				<p>Please enter an essay that contains the words "bebop funk"</p>
 				<textarea name="funk" id="funk">
