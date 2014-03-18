@@ -1,0 +1,13 @@
+html, body, div, p {margin: 0; padding: 0;}
+.form_a {display: block; position: relative; float: left; width: 45%; border: 1px solid #000; top: 200px;}
+.form_b {display: block; position: relative; float: left; width: 45%; left: 4%; border: 1px solid #000; top: 200px;}
+.form_a *, .form_b * {display: block; position: relative; width: 80%; margin-left: auto; margin-right: auto;}
+.form_a form, .form_b form {width: 99%;}
+.form_a input, .form_b input {min-height: 40px; font-size: 14pt;}
+.form_a textarea, .form_b textarea {min-height: 200px;}
+.formvalidation_message
+{
+ 	background: #FFFFAD;
+ 	color: #FF4D4D;
+ 	cursor: pointer;
+}

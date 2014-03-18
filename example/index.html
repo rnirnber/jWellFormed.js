@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>JWellFormed.js | Example</title>
+		<link rel="stylesheet" href="./index.css" />
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="./jWellFormed.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function()
+			{
+				var validator_a = new FormValidator("#form_a");
+				validator_a.ensure(".field", function(element)
+				{
+					return $(element).val().split(" ").length >= 50;
+				}, "Oh no, your essay was too short :(");
+
+				validator_a.watch();
+
+				var validator_b = new FormValidator("#form_b", false, function() {window.alert('congrats! you should be a poet!');});
+				validator_b.ensure("#funk", function(element)
+				{
+					return $(element).val().indexOf("bebop funk") >= 0;
+				}, "No Bebop yo!");
+				validator_b.ensure("#pick_rhyme", function(element)
+				{
+					return $(element).val() !== "KK";
+				}, "Really?");
+
+				validator_b.ensureAsync("#rhymes_with_wordn", function(Element)
+				{
+					//http://rhymebrain.com/talk?function=getRhymes&word=hello
+					//
+					//[ {"word":"flow","freq":24,"score":300,"flags":"bc","syllables":"1"},
+					// {"word":"slow","freq":23,"score":300,"flags":"bc","syllables":"1"},
+					// ...
+					// ...
+					// ]
+					var get_params = {};
+					get_params["function"] = "getRhymes";
+					get_params["word"] = $(Element).parent().find("select").val();
+					return get_params;
+				}, function(response, element)
+					{
+						var rhymes = response;
+						for(var i = 0; i < rhymes.length; i++)
+						{
+							if(rhymes[i].word.toLowerCase() === $.trim($(element).val().toLowerCase()))
+							{
+								return true;
+							}
+						}
+						return false;
+					}, "http://rhymebrain.com/talk", "GET", "Yeah sorry, that didn't quite rhyme..");
+
+				validator_b.watch();
+			});
+		</script>
+	</head>
+	<body>
+		<center>jWellFormed Example</center>
+		<div class='form_a'>
+			<h2>Form one (Default Submission Behavior)</h2>
+			<form method="POST" action="#" id="form_a">
+				<p>Foo</p>
+				<input type="text" name="foo" value="Foo" id="foo"/>
+				<p>Bar</p>
+				<input type="text" name="bar" value="Bar" id="bar" />
+				
+				<p>Enter an essay that contains >= 50 words</p>
+				<textarea class="field" name="field2">
+					It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).				
+				</textarea>
+				<p>Enter another essay that contains >= 50 words</p>
+				<textarea class="field" name="field1">					
+					The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested.
+				</textarea>
+				<input type="submit" value="Try me!" />
+			</form>
+		</div>
+		<div class='form_b'>
+			<h2>Form B (Constructor override to return false and run a custom callback on validation)</h2>
+			<form method="POST" action="#" id="form_b">
+				<p>Please enter an essay that contains the words "bebop funk"</p>
+				<textarea name="funk" id="funk">
+					In the 1940s, the younger generation of bebop funk jazz musicians created a new style that came out of the 1930s' swing music. They partially strove to counter the popularization of swing with non-danceable music that demanded listening.
+				</textarea>
+				<p>Select a rhyming word</p>
+				<select name="pick_rhyme" id="pick_rhyme">
+					<option value='Red'>Red</option>
+					<option value='White'>White</option>
+					<option value='Blue'>Blue</option>
+					<option value='KK'>KK you're not allowed to pick this, the form validator will ensure this...</option>
+				</select>
+				<p>Now type a word that rhymes with your selection</p>
+				
+				<input type="text" name="rhyme" id="rhymes_with_wordn" />
+				<input type="submit" value="Try me!" />
+			</form>
+		</div>
+		
+	</body>
