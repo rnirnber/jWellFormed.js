@@ -90,10 +90,10 @@ window.FormValidator.prototype._checkResults = function()
 		    	//console.log(form._watches[i]);
 		    	if(form._watches[i].results[k] == "pending")
 		    	{
+					var url = form._watches[i]["url"];
 		    		var key_vals = form._watches[i].dataFn($(form._selector).find(form._watches[i]["selector"]).eq(k));
 		    		if(form._watches[i]["method"] == "GET")
 		    		{
-		    			var url = form._watches[i]["url"];
 						var do_qmark = true;
 		    			for(var key in key_vals)
 		    			{
