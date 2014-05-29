@@ -112,6 +112,10 @@ window.FormValidator.prototype._checkResults = function()
 		    			{
 		    				form._watches[i]["results"][k] = form._watches[i].responseFn(d, $(form._selector).find(form._watches[i]["selector"]).eq(k));
 		    				$(form._selector).eq(0).submit();
+							setTimeout(function()
+							{
+								form._watches[i]["results"][k] = "pending";
+							}, 100);
 		    			});
 					return false;
 		    		}
@@ -121,6 +125,11 @@ window.FormValidator.prototype._checkResults = function()
 		    			{
 		    				form._watches[i]["results"][k] = form._watches[i].responseFn(d, $(form._selector).find(form._watches[i]["selector"]).eq(k));
 		    				$(form._selector).eq(0).submit();
+							setTimeout(function()
+							{
+								form._watches[i]["results"][k] = "pending";
+							}, 100);
+
 		    			});
 					return false;
 		    		}
